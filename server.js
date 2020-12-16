@@ -17,6 +17,24 @@ fs.readFile("db/db.json", "utf8", (err, data) => {
     let notes = JSON.parse(data)
 })
 
+// API routes
+
+// get route for api/notes
+app.get("/api/notes", (req, res) => {
+    res.json(notes)
+})
+
+// post route for api/notes
+app.post("/api/notes", (req, res) => {
+    const newNotes = req.body
+    notes.push(newNotes)
+    updateDb()
+})
+
+// gets notes with specific IDs
+app.get("/api/notes/:id", (req, res) => {
+    res.json(notes[req.params.id])
+})
 
 app.listen(PORT, function() {
     console.log('App listening on PORT ' + PORT)
