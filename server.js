@@ -36,6 +36,14 @@ app.get("/api/notes/:id", (req, res) => {
     res.json(notes[req.params.id])
 })
 
+// deletes notes with specific IDs
+app.delete("/api/notes/:id", (req, res) => {
+    notes.splice(req.params.id, 1)
+    updateDb()
+})
+
+
+
 app.listen(PORT, function() {
     console.log('App listening on PORT ' + PORT)
 })
