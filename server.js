@@ -22,7 +22,7 @@ app.get("/notes", function (req, res) {
 })
 
 // takes user to the index.html page
-app.get("*", function (req, res) {
+app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"))
 })
 
@@ -40,15 +40,15 @@ app.post("/api/notes", function (req, res) {
 
         // new note variables
         let newNote = JSON.parse(data)
-        let note = req.body
+        let notes = req.body
         // adds new ID to every note
         let noteID = newNote.length + 1
         // variable that creates the next new note
-        let nextNote = { id: noteID, title: note.title, text: note.text }
+        let nextNote = { id: noteID, title: notes.title, text: notes.text }
         // pushes new note to array
         newNote.push(nextNote)
         // response
-        res.json(note)
+        res.json(notes)
 
         // writes new note to the db.json
         fs.writeFile(path.join(__dirname, "db/db.json"), JSON.stringify(newNote), (err, data) => {
@@ -62,13 +62,8 @@ app.post("/api/notes", function (req, res) {
 app.delete("/api/notes/:id", (req, res) => {
     // reads db.json to access notes array
     fs.readFile("db/db.json", (err, res) => {
-        // code snippet found on codota
-        let { id } = req.params
-        // returns notes array as object
         let notes = JSON.parse(data)
-        let notesIndex = notes.findIndex(p => p.id == id)
-        // removes clicked note from array
-        notes.splice(notesIndex, 1)
+        notes.splice(req.params.id, 1)
         // writes updated array to db.json
         fs.writeFile(path.join(__dirname, "db/db.json"), JSON.stringify(notes), (err, data) => {
             if (err) throw err
