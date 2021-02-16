@@ -2,7 +2,6 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
-const { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } = require('constants')
 const app = express()
 const PORT = process.env.port || 3030
 
@@ -16,15 +15,16 @@ app.use(express.static(__dirname + '/public'))
 
 // *** HTML ROUTES *** //
 
+// takes user to the index.html page
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"))
+})
+
 // takes user to the notes.html page
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "public/notes.html"))
 })
 
-// takes user to the index.html page
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "public/index.html"))
-})
 
 // *** API ROUTES *** //
 
@@ -61,14 +61,16 @@ app.post("/api/notes", function (req, res) {
 // deletes notes from db.json
 app.delete("/api/notes/:id", (req, res) => {
     // reads db.json to access notes array
-    fs.readFile("db/db.json", (err, res) => {
-        let notes = JSON.parse(data)
-        notes.splice(req.params.id, 1)
+    fs.readFile("db/db.json", (err, data) => {
+        let note = JSON.parse(data)
+        let deletedNote = req.body
+        note.splice(deletedNote, 1)
         // writes updated array to db.json
-        fs.writeFile(path.join(__dirname, "db/db.json"), JSON.stringify(notes), (err, data) => {
+        fs.writeFile(path.join(__dirname, "db/db.json"), JSON.stringify(note), (err, data) => {
             if (err) throw err
+            console.log("Your note has been deleted!")
+            
         })
-        // sends updated array to db.json
         res.sendFile(path.join(__dirname, "db/db.json"))
     })
 })
