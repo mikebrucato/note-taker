@@ -1,7 +1,5 @@
 # note-taker
 
-Person Porfolio
-
 # Description
 
 This a note taker application that allows you to take notes on the go and gives you the ability to add and delete notes at your will!
