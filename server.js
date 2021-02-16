@@ -3,7 +3,7 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 const app = express()
-const PORT = process.env.port || 3030
+const PORT = process.env.PORT || 3030
 
 
 // setting up the express app to handle data parsing
@@ -68,13 +68,13 @@ app.delete("/api/notes/:id", (req, res) => {
         // writes updated array to db.json
         fs.writeFile(path.join(__dirname, "db/db.json"), JSON.stringify(note), (err, data) => {
             if (err) throw err
-            console.log("Your note has been deleted!")  
+            console.log("Your note has been deleted!")
         })
         res.json(req.body)
     })
 })
 
-
+// aasl;kdjaskl;djaskl;djasl;kdjaskl;djaskl;djaskl;djakl;sjdaskl;
 
 app.listen(PORT, function () {
     console.log('App listening on PORT ' + PORT)
