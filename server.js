@@ -68,9 +68,9 @@ app.delete("/api/notes/:id", (req, res) => {
         // writes updated array to db.json
         fs.writeFile(path.join(__dirname, "db/db.json"), JSON.stringify(note), (err, data) => {
             if (err) throw err
-            console.log("Your note has been deleted!")
-            
+            console.log("Your note has been deleted!")  
         })
+        res.json(req.body)
     })
 })
 
