@@ -7,6 +7,12 @@ This a note taker application that allows you to take notes on the go and gives 
 
 LINK TO DEPLOYED APPLICATION https://limitless-escarpment-88300.herokuapp.com/
 
+# Technologies Used
+
+- Express
+- Fs
+- Nodemon
+
 
 LICENSE Copyright (c) [2020] [Michael Brucato]
 
