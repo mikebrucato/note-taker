@@ -71,7 +71,6 @@ app.delete("/api/notes/:id", (req, res) => {
             console.log("Your note has been deleted!")
             
         })
-        res.sendFile(path.join(__dirname, "db/db.json"))
     })
 })
 
