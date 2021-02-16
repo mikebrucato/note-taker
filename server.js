@@ -74,7 +74,6 @@ app.delete("/api/notes/:id", (req, res) => {
     })
 })
 
-// aasl;kdjaskl;djaskl;djasl;kdjaskl;djaskl;djaskl;djakl;sjdaskl;
 
 app.listen(PORT, function () {
     console.log('App listening on PORT ' + PORT)
